@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import DeleteButton from './DeleteButton'
 
 const ArticleItem = ({
     article: {
@@ -19,34 +21,38 @@ const ArticleItem = ({
     navigation,
 }) => {
     return (
-        <TouchableOpacity
+        <Swipeable
+            renderRightActions={ () => <DeleteButton />}
+        >
+            <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
                 navigation.navigate('View')
             }}
-        >
-            <View style={styles.container}>
-                <View style={styles.icon}>
-                    <Ionicons name="md-list" size={14} color="#9e9e9e" />
+            >
+                <View style={styles.container}>
+                    <View style={styles.icon}>
+                        <Ionicons name="md-list" size={14} color="#9e9e9e" />
+                    </View>
+
+                    <View style={styles.info}>
+                        <Text style={styles.title}>
+                            {title}
+                        </Text>
+                        <Text
+                            numberOfLines={2}
+                            style={styles.content}
+                        >
+                            {content}
+                        </Text>
+                        <Text style={styles.date}>
+                            {date}
+                        </Text>
+                    </View>
                 </View>
 
-                <View style={styles.info}>
-                    <Text style={styles.title}>
-                        {title}
-                    </Text>
-                    <Text
-                        numberOfLines={2}
-                        style={styles.content}
-                    >
-                        {content}
-                    </Text>
-                    <Text style={styles.date}>
-                        {date}
-                    </Text>
-                </View>
-            </View>
-
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </Swipeable>
     )
 }
 
