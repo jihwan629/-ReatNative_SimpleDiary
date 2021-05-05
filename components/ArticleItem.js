@@ -27,7 +27,7 @@ const ArticleItem = ({
             <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-                navigation.navigate('View')
+                navigation.navigate('View', { id: id })
             }}
             >
                 <View style={styles.container}>

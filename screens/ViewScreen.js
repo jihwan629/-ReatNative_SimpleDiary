@@ -7,14 +7,23 @@ import {
  } from 'react-native'
  import { SafeAreaView } from 'react-native-safe-area-context'
  import { withNavigation } from 'react-navigation'
+ import { withContext } from 'react-simplified-context'
  import ViewHeader from '../components/ViewHeader'
 
  const ViewScreen = ({
      navigation,
+     articles,
  }) => {
+    const id = navigation.getParam('id', -1)
+    const article = articles.find((a) => {
+        return a.id == id
+    })
+
      return (
          <SafeAreaView style={styles.container}>
-             <ViewHeader />
+
+             <ViewHeader title={article.title} />
+
              <ScrollView>
                  <TouchableOpacity
                     activeOpacity={0.8}
@@ -23,15 +32,15 @@ import {
                     }}
                  >
                     <Text style={styles.content}>
-                        오늘의 넷플릭스에서 나의 문어 선생님을 봤다. 정말 재밌고 슬펐다.
-                        다음에는 타이거 킹을 볼 생각이다.
+                        {article.content}
                     </Text>
                  </TouchableOpacity>
                  
                  <Text style={styles.date}>
-                     2021년 5월 5일
+                     {article.date}
                  </Text>
              </ScrollView>
+
          </SafeAreaView>
      )
  }
@@ -54,4 +63,4 @@ import {
      }
  })
 
- export default withNavigation(ViewScreen)
+ export default withNavigation(withContext(ViewScreen))

@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 const ViewHeader = ({
     navigation,
+    title,
 }) => {
     return (
         <View style={styles.container}>
@@ -24,7 +25,7 @@ const ViewHeader = ({
             </TouchableOpacity>
 
             <Text style={styles.title}>
-                제목
+                {title}
             </Text>
 
             <TouchableOpacity
