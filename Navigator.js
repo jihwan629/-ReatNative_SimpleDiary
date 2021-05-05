@@ -1,10 +1,12 @@
 import React from 'react'
 import { createAppContainer } from 'react-navigation'
-import { ceateBottomTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 import { Ionicons } from '@expo/vector-icons'
 
 import ListScreen from './screens/ListScreen'
 import BookmarkScreen from './screens/BookmarkScreen'
+import EditScreen from './screens/EditScreen'
 
 const TabNavigator = createBottomTabNavigator({
     List: {
@@ -15,6 +17,19 @@ const TabNavigator = createBottomTabNavigator({
                 />
             },
             tabBarLabel: '목록',
+        }
+    },
+
+    AddButton: {
+        screen: () => null,
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => {
+                return <Ionicons name="ios-add-circle" size={36} color="#da5746" 
+                />
+            },
+            tabBarOnPress: ({ navigation }) => {
+                navigation.navigate('Edit')
+            }
         }
     },
 
@@ -39,4 +54,13 @@ const TabNavigator = createBottomTabNavigator({
     }
 }) 
 
-export default createAppContainer(TabNavigator)
+const AppNavigator = createStackNavigator({
+    Edit: EditScreen,
+    Tab: TabNavigator,
+}, {
+    initialRouteName: 'Tab',
+    mode: 'modal',
+    headerMode: 'none',
+})
+
+export default createAppContainer(AppNavigator)
