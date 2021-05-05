@@ -1,21 +1,33 @@
 import React from 'react'
 import { 
     Text,
+    TouchableOpacity,
     ScrollView,
     StyleSheet,
  } from 'react-native'
  import { SafeAreaView } from 'react-native-safe-area-context'
+ import { withNavigation } from 'react-navigation'
  import ViewHeader from '../components/ViewHeader'
 
- const ViewScreen = () => {
+ const ViewScreen = ({
+     navigation,
+ }) => {
      return (
          <SafeAreaView style={styles.container}>
              <ViewHeader />
              <ScrollView>
-                 <Text style={styles.content}>
-                    오늘의 넷플릭스에서 나의 문어 선생님을 봤다. 정말 재밌고 슬펐다.
-                    다음에는 타이거 킹을 볼 생각이다.
-                 </Text>
+                 <TouchableOpacity
+                    activeOpacity={0.8}
+                    onLongPress={() => {
+                        navigation.navigate('Edit')
+                    }}
+                 >
+                    <Text style={styles.content}>
+                        오늘의 넷플릭스에서 나의 문어 선생님을 봤다. 정말 재밌고 슬펐다.
+                        다음에는 타이거 킹을 볼 생각이다.
+                    </Text>
+                 </TouchableOpacity>
+                 
                  <Text style={styles.date}>
                      2021년 5월 5일
                  </Text>
@@ -42,4 +54,4 @@ import {
      }
  })
 
- export default ViewScreen
+ export default withNavigation(ViewScreen)
