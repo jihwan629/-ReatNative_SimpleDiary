@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Platform,
 } from 'react-native'
+import { withNavigation } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
 const ArticleItem = ({
@@ -15,10 +16,14 @@ const ArticleItem = ({
         content,
         date,
     },
+    navigation,
 }) => {
     return (
         <TouchableOpacity
             activeOpacity={0.8}
+            onPress={() => {
+                navigation.navigate('View')
+            }}
         >
             <View style={styles.container}>
                 <View style={styles.icon}>
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ArticleItem
+export default withNavigation(ArticleItem)
