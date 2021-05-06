@@ -13,6 +13,7 @@ import {
  const ViewScreen = ({
      navigation,
      articles,
+     toggle,
  }) => {
     const id = navigation.getParam('id', -1)
     const article = articles.find((a) => {
@@ -22,7 +23,13 @@ import {
      return (
          <SafeAreaView style={styles.container}>
 
-             <ViewHeader title={article.title} />
+             <ViewHeader 
+                title={article.title} 
+                bookmarked = {article.bookmarked}
+                bookmark={() => {
+                    toggle(id)
+                }}
+            />
 
              <ScrollView>
                  <TouchableOpacity
