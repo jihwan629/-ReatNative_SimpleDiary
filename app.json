@@ -20,6 +20,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "me.jihwan629.simple_diary",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
