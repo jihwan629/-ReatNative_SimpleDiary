@@ -7,6 +7,7 @@ import {
     Platform,
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { withContext } from 'react-simplified-context'
 import { Ionicons } from '@expo/vector-icons'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import DeleteButton from './DeleteButton'
@@ -19,10 +20,13 @@ const ArticleItem = ({
         date,
     },
     navigation,
+    remove,
 }) => {
     return (
         <Swipeable
-            renderRightActions={ () => <DeleteButton />}
+            renderRightActions = {() =>
+                <DeleteButton onPress={() => remove(id)} />
+            }
         >
             <TouchableOpacity
             activeOpacity={0.8}
@@ -97,4 +101,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(ArticleItem)
+export default withNavigation(withContext(ArticleItem))

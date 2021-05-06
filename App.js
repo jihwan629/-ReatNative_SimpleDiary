@@ -38,7 +38,7 @@ export default class App extends React.Component {
             }].concat(this.state.articles),
             id: this.state.id + 1,
           }, this.save)
-          
+
         }}
 
         update={(id, title, content) => {
@@ -53,6 +53,7 @@ export default class App extends React.Component {
           this.setState({
             articles: newArticles,
           }, this.save)
+
         }}
 
         toggle={(id) => {
@@ -65,6 +66,16 @@ export default class App extends React.Component {
 
           this.setState({
             articles: newArticles,
+          }, this.save)
+        }}
+
+        remove={(id) => {
+          const index = this.state.articles.findIndex((a) => {
+            return a.id === id
+          })   
+
+          this.setState({ 
+            articles: this.state.articles.filter((_, i) => i !== index)
           }, this.save)
         }}
       >
