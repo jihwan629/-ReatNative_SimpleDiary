@@ -28,7 +28,7 @@ import {
                  <TouchableOpacity
                     activeOpacity={0.8}
                     onLongPress={() => {
-                        navigation.navigate('Edit')
+                        navigation.navigate('Edit', { id: id })
                     }}
                  >
                     <Text style={styles.content}>

@@ -7,19 +7,32 @@ import {
  } from 'react-native'
  import { SafeAreaView } from 'react-native-safe-area-context'
  import { withContext } from 'react-simplified-context'
+ import { withNavigation } from 'react-navigation'
  import EditHeader from '../components/EditHeader'
 
 const EditScreen = ({
     create,
+    update,
+    articles,
+    navigation,
 }) => {
-    let title = ''
-    let content = ''
+    const id = navigation.getParam('id', -1)
+    const article = articles.find((a) => { 
+        return a.id === id 
+    })
+
+    let title = article ? article.title : ''
+    let content = article ? article.content : ''
 
     return (
         <SafeAreaView style={styles.container}>
             
             <EditHeader done={() => {
-                create(title, content)
+                if (id > -1) {
+                    update(id, title, content)
+                } else {
+                    create(title, content)
+                }
             }} />
 
             <View style={styles.body}>
@@ -29,8 +42,12 @@ const EditScreen = ({
                         title = text 
                     }}
                     style={styles.title}
-                />
+                >
+                    {title}
+                </TextInput>
+
                 <View style={styles.divider} />
+                
                 <TextInput 
                     placeholder="이곳을 눌러 작성을 시작하세요." 
                     multiline={true}
@@ -38,7 +55,9 @@ const EditScreen = ({
                         content = text 
                     }}
                     style={styles.content}
-                />
+                >
+                    {content}
+                </TextInput>
             </View>
         </SafeAreaView>
         
@@ -77,4 +96,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withContext(EditScreen)
+export default withNavigation(withContext(EditScreen))

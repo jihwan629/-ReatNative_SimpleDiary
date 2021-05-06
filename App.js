@@ -41,6 +41,20 @@ export default class App extends React.Component {
           })
           
         }}
+
+        update={(id, title, content) => {
+          const newArticles = [...this.state.articles]
+          const index = newArticles.findIndex((a) => {
+            return a.id === id
+          })
+
+          newArticles[index].title = title
+          newArticles[index].content = content
+
+          this.setState({
+            articles: newArticles,
+          })
+        }}
       >
         <Navigator />
       </ContextProvider>
